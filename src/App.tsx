@@ -14,7 +14,9 @@ export default function App() {
         },
       }}
       components={{
-        Footer: () => null,
+        SignIn: {
+          Footer: () => null,
+        },
       }}
     >
       {({ signOut, user }) => (
