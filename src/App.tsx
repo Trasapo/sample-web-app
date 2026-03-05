@@ -3,7 +3,9 @@ import '@aws-amplify/ui-react/styles.css';
 
 export default function App() {
   return (
-    <Authenticator>
+    <Authenticator hideSignUp={true} components={{
+      Footer: () => null // パスワードを忘れた場合のリンクを非表示にする
+    }}>
       {({ signOut, user }) => (
         <main>
           <h1>こんにちは、 {user?.username} さん！</h1>
