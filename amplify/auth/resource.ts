@@ -6,6 +6,10 @@ export const auth = defineAuth({
   },
   userAttributes: {
     // email: { required: false } // userNameログインのみの場合は不要
+    "custom:company_name": {
+      dataType: "String",
+      mutable: true,
+    },
   },
   groups: ["AdminGroup", "UserGroupA"],
 });
