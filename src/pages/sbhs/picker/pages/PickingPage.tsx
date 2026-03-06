@@ -20,6 +20,7 @@ export default function PickingPage({ username, targetDate, onDateChange, onLogo
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showLogoutDialog, setShowLogoutDialog] = useState(false);
   const [showReloadDialog, setShowReloadDialog] = useState(false);
+  const [showSaveDialog, setShowSaveDialog] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const load = async () => {
@@ -60,11 +61,11 @@ export default function PickingPage({ username, targetDate, onDateChange, onLogo
       return mine ?? pkg;
     });
     savePackages(merged);
-    alert('保存しました');
+    setShowSaveDialog(true);
   }
 
   return (
-    <div className="min-h-screen bg-slate-100 flex flex-col">
+    <div className="fixed inset-0 bg-slate-100 flex flex-col overflow-auto">
       <AppSidebar
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
@@ -92,6 +93,16 @@ export default function PickingPage({ username, targetDate, onDateChange, onLogo
         confirmClass="bg-indigo-600 hover:bg-indigo-700"
         onCancel={() => setShowReloadDialog(false)}
         onConfirm={() => { setShowReloadDialog(false); load(); }}
+      />
+
+      <ConfirmDialog
+        isOpen={showSaveDialog}
+        title="保存完了"
+        message="保存しました。"
+        confirmLabel="OK"
+        confirmClass="bg-indigo-600 hover:bg-indigo-700"
+        onCancel={() => setShowSaveDialog(false)}
+        onConfirm={() => setShowSaveDialog(false)}
       />
 
       <header className="bg-white border-b border-slate-200 shadow-sm">

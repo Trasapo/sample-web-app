@@ -1,0 +1,41 @@
+[
+  {
+    "id": 1,
+    "assignerId": 1,
+    "assignerName": "ピッカーA",
+    "packages": [
+      {
+        "id": 1,
+        "trackingNumber": "TRK001",
+        "recipient": "山田太郎",
+        "address": "東京都渋谷区1-1-1"
+      },
+      {
+        "id": 2,
+        "trackingNumber": "TRK002",
+        "recipient": "佐藤花子",
+        "address": "大阪府大阪市2-2-2"
+      }
+    ],
+    "status": "in_progress",
+    "createdAt": "2024-01-15T10:00:00Z"
+  },
+  {
+    "id": 2,
+    "assignerId": 2,
+    "assignerName": "ピッカーB",
+    "packages": [
+      {
+        "id": 3,
+        "trackingNumber": "TRK003",
+        "recipient": "鈴木一郎",
+        "address": "愛知県名古屋市3-3-3"
+      }
+    ],
+    "status": "pending",
+    "createdAt": "2024-01-15T12:00:00Z"
+  }
+]
+
+
+

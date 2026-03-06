@@ -22,6 +22,8 @@ export default function AssignPage({ username, targetDate, onDateChange, onLogou
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showLogoutDialog, setShowLogoutDialog] = useState(false);
+  const [showReloadDialog, setShowReloadDialog] = useState(false);
+  const [showSaveDialog, setShowSaveDialog] = useState(false);
   const assignerScrollRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -70,11 +72,11 @@ export default function AssignPage({ username, targetDate, onDateChange, onLogou
 
   function handleSave() {
     savePackages(packages);
-    alert('保存しました');
+    setShowSaveDialog(true);
   }
 
   return (
-    <div className="min-h-screen bg-slate-100 flex flex-col">
+    <div className="fixed inset-0 bg-slate-100 flex flex-col overflow-auto">
       <AppSidebar
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
@@ -92,6 +94,26 @@ export default function AssignPage({ username, targetDate, onDateChange, onLogou
         confirmClass="bg-red-600 hover:bg-red-700"
         onCancel={() => setShowLogoutDialog(false)}
         onConfirm={onLogout}
+      />
+
+      <ConfirmDialog
+        isOpen={showReloadDialog}
+        title="リロード確認"
+        message={'データをリロードすると、保存していない変更はすべて失われます。\n\nよろしいですか？'}
+        confirmLabel="リロード"
+        confirmClass="bg-indigo-600 hover:bg-indigo-700"
+        onCancel={() => setShowReloadDialog(false)}
+        onConfirm={() => { setShowReloadDialog(false); load(); }}
+      />
+
+      <ConfirmDialog
+        isOpen={showSaveDialog}
+        title="保存完了"
+        message="保存しました。"
+        confirmLabel="OK"
+        confirmClass="bg-indigo-600 hover:bg-indigo-700"
+        onCancel={() => setShowSaveDialog(false)}
+        onConfirm={() => setShowSaveDialog(false)}
       />
 
       <header className="bg-white border-b border-slate-200 shadow-sm">
@@ -123,7 +145,7 @@ export default function AssignPage({ username, targetDate, onDateChange, onLogou
           </div>
 
           <div className="flex items-center gap-3">
-            <button onClick={load} className="p-2 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors" title="リロード">
+            <button onClick={() => setShowReloadDialog(true)} className="p-2 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors" title="リロード">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
               </svg>

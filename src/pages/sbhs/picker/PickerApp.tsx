@@ -81,61 +81,54 @@ function DateDialog({ initialDate, onConfirm }: { initialDate: string; onConfirm
   );
 }
 
-function PickerHome({ username }: { username: string }) {
-  const navigate = useNavigate();
+function PickerHome({ onLogin }: { onLogin: (role: 'assign' | 'picking', userId?: string) => void }) {
   return (
-    <div className="min-h-screen bg-slate-100 flex flex-col">
-      <header className="bg-white border-b border-slate-200 shadow-sm">
-        <div className="w-full px-4 sm:px-6 h-14 flex items-center justify-between">
-          <h1 className="text-lg font-semibold text-slate-900">ピッキングツール</h1>
-          <span className="text-sm text-slate-600">{username}</span>
-        </div>
-      </header>
+    <div className="fixed inset-0 bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4 overflow-auto">
+      <div className="w-full max-w-md">
+        <div className="bg-white rounded-2xl shadow-xl p-8 space-y-6">
+          <div className="text-center space-y-2">
+            <h1 className="text-3xl font-bold text-gray-900">ログイン</h1>
+            <p className="text-gray-600">アカウントにログインしてください</p>
+          </div>
 
-      <main className="flex-1 max-w-3xl w-full mx-auto px-4 sm:px-6 py-10">
-        <p className="text-slate-500 text-sm mb-6">ページを選択してください</p>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-          <button
-            onClick={() => navigate('assign')}
-            className="bg-white rounded-2xl shadow border border-slate-200 p-6 flex flex-col items-center gap-3 hover:shadow-md hover:border-indigo-300 hover:text-indigo-600 transition-all text-slate-700"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-            </svg>
-            <span className="text-sm font-medium text-center">荷物割り当て</span>
-          </button>
-          <button
-            onClick={() => navigate('manage')}
-            className="bg-white rounded-2xl shadow border border-slate-200 p-6 flex flex-col items-center gap-3 hover:shadow-md hover:border-indigo-300 hover:text-indigo-600 transition-all text-slate-700"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
-            <span className="text-sm font-medium text-center">ピッキング管理</span>
-          </button>
-          <button
-            onClick={() => navigate('picking')}
-            className="bg-white rounded-2xl shadow border border-slate-200 p-6 flex flex-col items-center gap-3 hover:shadow-md hover:border-indigo-300 hover:text-indigo-600 transition-all text-slate-700"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-            </svg>
-            <span className="text-sm font-medium text-center">ピッキング</span>
-          </button>
-        </div>
-      </main>
+          <div className="space-y-5">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">ユーザー名</label>
+              <input
+                type="text"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all"
+                placeholder="ユーザー名を入力"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">パスワード</label>
+              <input
+                type="password"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all"
+                placeholder="パスワードを入力"
+              />
+            </div>
 
-      <footer className="bg-white border-t border-slate-200">
-        <div className="max-w-5xl mx-auto px-6 h-12 flex items-center justify-between text-sm text-slate-500">
-          <button
-            onClick={() => navigate('/sbhs')}
-            className="text-indigo-600 hover:text-indigo-700 font-medium"
-          >
-            ← ホームへ戻る
-          </button>
-          © TransSupporter
+            <button
+              onClick={() => onLogin('assign')}
+              className="w-full bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors"
+            >
+              ログイン (管理者/割り当て担当)
+            </button>
+
+            <button
+              onClick={() => onLogin('picking', '1000000003')}
+              className="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors mt-4"
+            >
+              高橋さんでログイン (ピッキング担当)
+            </button>
+          </div>
+
+          <div className="text-center text-sm text-gray-600">
+            <p>© TransSupporter</p>
+          </div>
         </div>
-      </footer>
+      </div>
     </div>
   );
 }
@@ -145,36 +138,41 @@ export default function PickerApp({ username }: Props) {
   const [targetDate, setTargetDate] = useState<string>(() => {
     return sessionStorage.getItem('targetDate') || getTodayString();
   });
-  const [showDateDialog, setShowDateDialog] = useState<boolean>(() => {
-    return !sessionStorage.getItem('targetDate');
-  });
+  const [pendingRole, setPendingRole] = useState<'assign' | 'picking' | null>(null);
+  const [pickerUserId, setPickerUserId] = useState<string>('');
 
   useEffect(() => {
     sessionStorage.setItem('targetDate', targetDate);
   }, [targetDate]);
 
+  function handleLogin(role: 'assign' | 'picking', userId?: string) {
+    if (userId) setPickerUserId(userId);
+    navigate(role);
+    setPendingRole(role);
+  }
+
   function handleDateConfirm(date: string) {
     setTargetDate(date);
-    setShowDateDialog(false);
+    setPendingRole(null);
   }
 
   const sharedProps = {
     username,
     targetDate,
     onDateChange: setTargetDate,
-    onLogout: () => navigate(''),
+    onLogout: () => navigate('/sbhs/picker'),
   };
 
   return (
     <>
-      {showDateDialog && (
-        <DateDialog initialDate={targetDate} onConfirm={handleDateConfirm} />
+      {pendingRole !== null && (
+        <DateDialog initialDate={getTodayString()} onConfirm={handleDateConfirm} />
       )}
       <Routes>
-        <Route index element={<PickerHome username={username} />} />
+        <Route index element={<PickerHome onLogin={handleLogin} />} />
         <Route path="assign" element={<AssignPage {...sharedProps} />} />
         <Route path="manage" element={<ManagePage {...sharedProps} />} />
-        <Route path="picking" element={<PickingPage {...sharedProps} />} />
+        <Route path="picking" element={<PickingPage {...sharedProps} username={pickerUserId || username} />} />
       </Routes>
     </>
   );

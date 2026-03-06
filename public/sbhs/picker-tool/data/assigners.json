@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "ピッカーA",
+    "email": "picker-a@example.com",
+    "status": "active",
+    "currentPackageCount": 2
+  },
+  {
+    "id": 2,
+    "name": "ピッカーB",
+    "email": "picker-b@example.com",
+    "status": "active",
+    "currentPackageCount": 1
+  },
+  {
+    "id": 3,
+    "name": "ピッカーC",
+    "email": "picker-c@example.com",
+    "status": "inactive",
+    "currentPackageCount": 0
+  }
+]
+
+
+
