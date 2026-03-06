@@ -9,6 +9,7 @@ import SbhsPage from './pages/sbhs/SbhsPage';
 function AuthenticatedApp({ signOut, user }: { signOut: () => void; user: { username: string } }) {
   const [groups, setGroups] = useState<string[]>([]);
   const [companyName, setCompanyName] = useState<string>('');
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetchAuthSession().then((session) => {
@@ -16,12 +17,36 @@ function AuthenticatedApp({ signOut, user }: { signOut: () => void; user: { user
       const userGroups = (payload?.['cognito:groups'] as string[]) ?? [];
       setGroups(userGroups);
       setCompanyName((payload?.['custom:company_name'] as string) ?? '');
+    }).finally(() => {
+      setIsLoading(false);
     });
   }, []);
 
   const isAdmin = groups.includes('AdminGroup');
 
-  if (groups.length === 0) return null;
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-gray-500">読み込み中...</p>
+      </div>
+    );
+  }
+
+  // もしグループが1つも割り当てられていない場合（事前ログイン時のキャッシュなど）
+  // ログアウトできるように最低限のUIを表示する
+  if (groups.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen gap-4">
+        <p className="text-red-500">権限グループが設定されていません。再度ログインをお試しください。</p>
+        <button
+          onClick={signOut}
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          ログアウト
+        </button>
+      </div>
+    );
+  }
 
   return (
     <Router>
