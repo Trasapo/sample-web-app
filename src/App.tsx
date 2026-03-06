@@ -37,6 +37,7 @@ export default function App() {
           username: {
             label: 'ユーザーID',
             placeholder: 'IDを入力してください',
+            type: 'text',
           },
         },
       }}
