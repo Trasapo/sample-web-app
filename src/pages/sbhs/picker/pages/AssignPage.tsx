@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import AppSidebar from '../components/AppSidebar';
 import ConfirmDialog from '../components/ConfirmDialog';
 import { getPackages, getUsers, savePackages } from '../mockApi';
-import { Package, User } from '../types';
+import type { Package, User } from '../types';
 
 type Props = {
   username: string;

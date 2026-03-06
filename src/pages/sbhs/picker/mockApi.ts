@@ -1,4 +1,4 @@
-import { Package, User } from './types';
+import type { Package, User } from './types';
 
 // モックデータ（packages.js から変換）
 const initialPackages: Package[] = [

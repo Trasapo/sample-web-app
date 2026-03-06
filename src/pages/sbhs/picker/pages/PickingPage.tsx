@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import AppSidebar from '../components/AppSidebar';
 import ConfirmDialog from '../components/ConfirmDialog';
 import { getPackages, getUsers, savePackages } from '../mockApi';
-import { Package } from '../types';
+import type { Package } from '../types';
 
 type Props = {
   username: string;
@@ -22,14 +22,10 @@ export default function PickingPage({ username, targetDate, onDateChange, onLogo
   const [showReloadDialog, setShowReloadDialog] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // 現在ログイン中のユーザーIDを解決（Cognitoのusernameが直接IDと一致する想定）
-  const [currentUserId, setCurrentUserId] = useState<string>('');
-
   const load = async () => {
     const users = getUsers();
     const user = users.find((u) => u.name === username) || users.find((u) => u.id === username);
     const userId = user?.id ?? username;
-    setCurrentUserId(userId);
 
     const allPkgs = getPackages(targetDate);
     setPackages(allPkgs);
