@@ -27,8 +27,8 @@ function AuthenticatedApp({ signOut, user }: { signOut: () => void; user: { user
     <Router>
       <Routes>
         {isAdmin && <Route path="/admin" element={<AdminPage username={user.username} signOut={signOut} />} />}
-        {!isAdmin && <Route path="/sbhs" element={<SbhsPage username={user.username} companyName={companyName} signOut={signOut} />} />}
-        <Route path="*" element={<Navigate to={isAdmin ? '/admin' : '/sbhs'} replace />} />
+        <Route path="/sbhs/*" element={<SbhsPage username={user.username} companyName={companyName} signOut={signOut} isAdmin={isAdmin} />} />
+        <Route path="*" element={<Navigate to="/sbhs" replace />} />
       </Routes>
     </Router>
   );
