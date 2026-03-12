@@ -5,6 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>荷物の振り分け</title>
+  <script>
+      if (!Object.keys(localStorage).some(k => k.includes('CognitoIdentityServiceProvider') && k.includes('idToken'))) {
+          window.location.replace('/');
+      }
+  </script>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Flatpickr CSS -->
