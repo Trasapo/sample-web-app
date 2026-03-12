@@ -35,8 +35,8 @@ function AuthenticatedApp({ user }: { signOut: () => void; user: { username: str
     <Router>
       <Routes>
         <Route path="/admin" element={isAdmin ? <AdminPage username={user.username} signOut={signOut} /> : <Navigate to={defaultPath} replace />} />
-        <Route path="/sbhs/*" element={<SbhsPage username={user.username} companyName={companyName || (COMPANIES.find(c => c.id === 'sbhs')?.name ?? '')} signOut={signOut} isAdmin={isAdmin} />} />
-        <Route path="/tkk/*" element={<ToyotsuPage username={user.username} companyName={companyName || (COMPANIES.find(c => c.id === 'tkk')?.name ?? '')} signOut={signOut} isAdmin={isAdmin} />} />
+        <Route path="/sbhs/*" element={<SbhsPage username={user.username} companyName={companyName || (COMPANIES.find(c => c.id === 'sbhs')?.name ?? '')} signOut={signOut} />} />
+        <Route path="/tkk/*" element={<ToyotsuPage username={user.username} companyName={companyName || (COMPANIES.find(c => c.id === 'tkk')?.name ?? '')} signOut={signOut} />} />
         <Route path="*" element={<Navigate to={defaultPath} replace />} />
       </Routes>
     </Router>
