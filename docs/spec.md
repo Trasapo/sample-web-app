@@ -74,6 +74,16 @@ aws cognito-idp admin-add-user-to-group \
 
 ---
 
+## ユーザー一覧
+
+| 権限 | ユーザーID | パスワード | 企業名 | グループ |
+|---|---|---|---|---|
+| 管理者 | seikou | Seikou@4703 | - | AdminGroup |
+| 一般ユーザー | shibahashi | Shiba@1234 | 柴橋商会 | UserGroupA |
+| 一般ユーザー | toyotsust | Toyotsu@1234 | 豊通鋼管 | UserGroupB |
+
+---
+
 ## 画面仕様
 
 ### ログイン画面

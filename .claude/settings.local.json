@@ -8,7 +8,9 @@
       "Bash(done)",
       "Bash(aws cognito-idp list-users --user-pool-id ap-northeast-1_JrgzvwxhZ --region ap-northeast-1 --output json)",
       "Bash(aws cognito-idp admin-list-groups-for-user --user-pool-id ap-northeast-1_JrgzvwxhZ --username shibahashi --region ap-northeast-1 --query \"Groups[*].GroupName\" --output text)",
-      "Bash(aws cognito-idp admin-list-groups-for-user --user-pool-id ap-northeast-1_JrgzvwxhZ --username seikou --region ap-northeast-1 --query \"Groups[*].GroupName\" --output text)"
+      "Bash(aws cognito-idp admin-list-groups-for-user --user-pool-id ap-northeast-1_JrgzvwxhZ --username seikou --region ap-northeast-1 --query \"Groups[*].GroupName\" --output text)",
+      "Bash(cp \"/Users/yanase/Documents/サンプル/豊通鋼管/積載最適化/v001/index.html\" \"/Users/yanase/Documents/develop/Github/sample-web-app/public/tkk/load-optimizer/index.html\")",
+      "Bash(cp \"/Users/yanase/Documents/サンプル/豊通鋼管/積載最適化/v001/logic.js\" \"/Users/yanase/Documents/develop/Github/sample-web-app/public/tkk/load-optimizer/logic.js\")"
     ]
   }
 }

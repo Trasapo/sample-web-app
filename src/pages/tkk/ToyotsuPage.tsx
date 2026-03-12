@@ -1,38 +1,16 @@
-import { Route, Routes } from 'react-router-dom';
-import PickerApp from './picker/PickerApp';
-
 type Props = {
   username: string;
   companyName: string;
   signOut: () => void;
 };
 
-export default function SbhsPage({ username, companyName, signOut }: Props) {
-  return (
-    <Routes>
-      <Route
-        index
-        element={<SbhsHome username={username} companyName={companyName} signOut={signOut} />}
-      />
-      <Route path="picker/*" element={<PickerApp username={username} />} />
-    </Routes>
-  );
-}
-
-type HomeProps = {
-  username: string;
-  companyName: string;
-  signOut: () => void;
-};
-
-function SbhsHome({ username, companyName, signOut }: HomeProps) {
-
+export default function ToyotsuPage({ username, companyName, signOut }: Props) {
   return (
     <div className="min-h-screen bg-slate-100 flex flex-col">
       <header className="bg-white border-b border-slate-200 shadow-sm">
         <div className="w-full px-4 sm:px-6 h-14 flex items-center justify-between">
           <h1 className="text-lg font-semibold text-slate-900">
-            {companyName ? `${companyName} 様` : 'ホーム'}
+            {companyName ? `${companyName} 様` : '豊通鋼管 様'}
           </h1>
           <div className="flex items-center gap-4">
             <span className="text-sm text-slate-600">{username}</span>
@@ -49,13 +27,13 @@ function SbhsHome({ username, companyName, signOut }: HomeProps) {
       <main className="flex-1 w-full px-4 sm:px-6 py-10">
         <div className="flex flex-wrap gap-4">
           <TileButton
-            label="ピッキングツール"
+            label="積載最適化"
             icon={
               <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
               </svg>
             }
-            onClick={() => window.location.href = '/sbhs/picker-tool/index.html'}
+            onClick={() => window.location.href = '/tkk/load-optimizer/index.html'}
           />
         </div>
       </main>
