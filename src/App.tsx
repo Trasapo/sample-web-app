@@ -5,6 +5,7 @@ import '@aws-amplify/ui-react/styles.css';
 import { fetchAuthSession, signOut as amplifySignOut } from 'aws-amplify/auth';
 import AdminPage from './pages/admin/AdminPage';
 import SbhsPage from './pages/sbhs/SbhsPage';
+import ToyotsuPage from './pages/tkk/ToyotsuPage';
 import { COMPANIES } from './config/companies';
 
 function AuthenticatedApp({ user }: { signOut: () => void; user: { username: string } }) {
@@ -25,15 +26,18 @@ function AuthenticatedApp({ user }: { signOut: () => void; user: { username: str
   }, []);
 
   const isAdmin = groups.includes('AdminGroup');
+  const company = COMPANIES.find(c => groups.includes(c.group));
+  const defaultPath = isAdmin ? '/admin' : (company?.path ?? '/sbhs');
 
   if (groups.length === 0) return null;
 
   return (
     <Router>
       <Routes>
-        <Route path="/admin" element={isAdmin ? <AdminPage username={user.username} signOut={signOut} /> : <Navigate to="/sbhs" replace />} />
+        <Route path="/admin" element={isAdmin ? <AdminPage username={user.username} signOut={signOut} /> : <Navigate to={defaultPath} replace />} />
         <Route path="/sbhs/*" element={<SbhsPage username={user.username} companyName={companyName || (COMPANIES.find(c => c.id === 'sbhs')?.name ?? '')} signOut={signOut} isAdmin={isAdmin} />} />
-        <Route path="*" element={<Navigate to={isAdmin ? "/admin" : "/sbhs"} replace />} />
+        <Route path="/tkk/*" element={<ToyotsuPage username={user.username} companyName={companyName || (COMPANIES.find(c => c.id === 'tkk')?.name ?? '')} signOut={signOut} isAdmin={isAdmin} />} />
+        <Route path="*" element={<Navigate to={defaultPath} replace />} />
       </Routes>
     </Router>
   );
