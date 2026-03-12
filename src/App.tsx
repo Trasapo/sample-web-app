@@ -2,11 +2,16 @@ import { useEffect, useState } from 'react';
 import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { Authenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
-import { fetchAuthSession } from 'aws-amplify/auth';
+import { fetchAuthSession, signOut as amplifySignOut } from 'aws-amplify/auth';
 import AdminPage from './pages/admin/AdminPage';
 import SbhsPage from './pages/sbhs/SbhsPage';
+import { COMPANIES } from './config/companies';
 
-function AuthenticatedApp({ signOut, user }: { signOut: () => void; user: { username: string } }) {
+function AuthenticatedApp({ user }: { signOut: () => void; user: { username: string } }) {
+  const signOut = async () => {
+    await amplifySignOut();
+    window.location.replace('/');
+  };
   const [groups, setGroups] = useState<string[]>([]);
   const [companyName, setCompanyName] = useState<string>('');
 
@@ -26,9 +31,9 @@ function AuthenticatedApp({ signOut, user }: { signOut: () => void; user: { user
   return (
     <Router>
       <Routes>
-        {isAdmin && <Route path="/admin" element={<AdminPage username={user.username} signOut={signOut} />} />}
-        <Route path="/sbhs/*" element={<SbhsPage username={user.username} companyName={companyName} signOut={signOut} isAdmin={isAdmin} />} />
-        <Route path="*" element={<Navigate to="/sbhs" replace />} />
+        <Route path="/admin" element={isAdmin ? <AdminPage username={user.username} signOut={signOut} /> : <Navigate to="/sbhs" replace />} />
+        <Route path="/sbhs/*" element={<SbhsPage username={user.username} companyName={companyName || (COMPANIES.find(c => c.id === 'sbhs')?.name ?? '')} signOut={signOut} isAdmin={isAdmin} />} />
+        <Route path="*" element={<Navigate to={isAdmin ? "/admin" : "/sbhs"} replace />} />
       </Routes>
     </Router>
   );
