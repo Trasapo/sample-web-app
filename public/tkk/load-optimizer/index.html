@@ -56,6 +56,34 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            justify-content: space-between;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-back {
+            background-color: #f1f5f9;
+            color: #475569;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn-back:hover {
+            background-color: #e2e8f0;
+            color: #1e293b;
         }
 
         h1 {
@@ -409,8 +437,13 @@
 
     <div class="container">
         <header>
-            <div style="font-size: 2.2rem;">🏗️</div>
-            <h1>積載最適化システム</h1>
+            <div class="header-left">
+                <div style="font-size: 2.2rem;">🏗️</div>
+                <h1>積載最適化システム</h1>
+            </div>
+            <button class="btn-back" onclick="window.location.href='/tkk'">
+                ← ツール一覧に戻る
+            </button>
         </header>
 
         <!-- Vehicle Settings -->
